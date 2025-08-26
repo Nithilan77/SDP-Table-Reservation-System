@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - MR Pandian Hotel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      background-image: url('mr_pandian_maduravoyal.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+  
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-weight: 400;
+      color: #fff;
+    }
+  
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45); 
+      backdrop-filter: blur(5px);
+      z-index: 0;
+    }
+  
+    .login-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 45px 30px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+      z-index: 1;
+      animation: fadeZoomIn 1s ease forwards;
+      color: #fff;
+      font-smooth: always;
+    }
+  
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      text-align: center;
+      margin-bottom: 5px;
+      color: #fff;
+      -webkit-font-smoothing: auto;
+      font-weight: 600;
+    }
+  
+    p, h5 {
+      font-size: 15px;
+      color: #e6e6e6;
+      text-align: center;
+      font-weight: 500;
+    }
+  
+    .form-control {
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border: none;
+      font-size: 16px;
+      color: #000;
+      font-weight: 500;
+    }
+  
+    .input-group-text {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      color: #333;
+    }
+  
+    .btn {
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  
+    .btn-outline-primary,
+    .btn-outline-secondary {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+  
+    .btn-outline-primary:hover,
+    .btn-outline-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+  
+    .btn-success {
+      box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+    }
+  
+    .btn-primary {
+      box-shadow: 0 0 10px rgba(13, 110, 253, 0.4);
+    }
+  
+    .btn-link {
+      color: #ddd;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  
+    .btn-link:hover {
+      color: #fff;
+    }
+  
+    @keyframes fadeZoomIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  
+
+  </style>
+  
+</head>
+<body>
+  <!-- Toast Container -->
+  <div class="toast-container">
+    <div class="toast align-items-center text-white bg-success border-0" role="alert" id="successToast">
+      <div class="d-flex">
+        <div class="toast-body">Success! Logged in.</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+    <div class="toast align-items-center text-white bg-danger border-0" role="alert" id="errorToast">
+      <div class="d-flex">
+        <div class="toast-body">Error! Invalid credentials.</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+    <div class="toast align-items-center text-white bg-primary border-0" role="alert" id="registerSuccessToast" data-bs-delay="3000">
+      <div class="d-flex">
+        <div class="toast-body">✅ Registration Successful! Please login now.</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-container">
+    <h2 id="hotelTitle">MR Pandian Hotel</h2>
+    <p id="hotelSub">Table Reservation Login</p>
+
+    <!-- Role Toggle -->
+    <div class="text-center mb-4">
+      <button class="btn btn-outline-primary me-2" onclick="setRole('user')">User Login</button>
+      <button class="btn btn-outline-secondary" onclick="setRole('admin')">Admin Login</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" method="POST" action="/cgi-bin/index_handler.exe">
+      <input type="hidden" name="role" id="login-role" value="user">
+      <h5 id="form-title">User Login</h5>
+      <input type="text" name="username" id="login-username" class="form-control mb-3" placeholder="Username" required>
+      <div class="input-group mb-4">
+        <input type="password" name="password" id="login-password" class="form-control" placeholder="Password" required>
+        <span class="input-group-text" onclick="togglePassword('login-password')">👁️</span>
+      </div>
+      <button type="submit" class="btn btn-success w-100">Login</button>
+    </form>
+
+    <!-- Register Prompt -->
+    <div class="text-center mt-3">
+      <button class="btn btn-link" onclick="showRegister()">New User? Register here</button>
+    </div>
+
+    <!-- Register Form -->
+    <form action="/cgi-bin/register_handler.exe" method="POST" id="register-form" style="display: none;">
+      <h5 class="text-center">User Registration</h5>
+      <input type="text" name="username" class="form-control mb-3" placeholder="Choose Username" required>
+      <div class="input-group mb-4">
+        <input type="password" name="password" id="register-password" class="form-control" placeholder="Create Password" required>
+        <span class="input-group-text" onclick="togglePassword('register-password')">👁️</span>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Register</button>
+      <div class="text-center mt-2">
+        <button class="btn btn-link" onclick="showLogin(); return false;">Back to Login</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+
+function handleLogin(e) {
+  e.preventDefault();
+
+  const username = document.getElementById("login-username").value.trim();
+  const password = document.getElementById("login-password").value.trim();
+  const role = document.getElementById("login-role").value;
+
+  if (!username || !password) {
+    showToast("errorToast");
+    return;
+  }
+
+  localStorage.setItem("userRole", role);
+  loginSuccess(role);
+}
+
+function loginSuccess(role) {
+  const toast = new bootstrap.Toast(document.getElementById("successToast"));
+  toast.show();
+  setTimeout(() => {
+    if (role === "admin") {
+      window.location.href = "admin_home.html";  
+    } else {
+      window.location.href = "home.html";  
+    }
+  }, 1000); 
+}
+
+
+// Show any toast by ID
+function showToast(id) {
+  const toast = new bootstrap.Toast(document.getElementById(id));
+  toast.show();
+}
+// Switch between user/admin login
+function setRole(role) {
+  document.getElementById("login-role").value = role;
+  document.getElementById("form-title").innerText = role === "admin" ? "Admin Login" : "User Login";
+  showLogin();
+  document.getElementById("login-username").value = "";
+  document.getElementById("login-password").value = "";
+}
+
+
+    function setRole(role) {
+    document.getElementById("login-role").value = role;
+    document.getElementById("form-title").innerText = role === "admin" ? "Admin Login" : "User Login";
+    document.getElementById("login-form").style.display = "block";
+    document.getElementById("register-form").style.display = "none";
+
+    // Reset input fields
+    document.querySelector("#login-form input[name='username']").value = '';
+    document.querySelector("#login-form input[name='password']").value = '';
+}
+
+
+    function showRegister() {
+      document.getElementById("login-form").style.display = "none";
+      document.getElementById("register-form").style.display = "block";
+    }
+
+    function showLogin() {
+      document.getElementById("register-form").style.display = "none";
+      document.getElementById("login-form").style.display = "block";
+    }
+
+    function togglePassword(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    function fakeLogin(e) {
+      e.preventDefault();
+      const toast = new bootstrap.Toast(document.getElementById("successToast"));
+      toast.show();
+
+      setTimeout(() => {
+      window.location.href = "home.html";
+      }, 1000); 
+    }
+
+	window.onload = function () {
+	  
+	  document.querySelector("#login-form input[name='username']").value = '';
+	  document.querySelector("#login-form input[name='password']").value = '';
+	  setRole("user");
+	  showLogin();
+
+	const params = new URLSearchParams(window.location.search);
+	if (params.get('registered') === 'success') {
+    const registerToastElement = document.getElementById("registerSuccessToast");
+    const registerToast = new bootstrap.Toast(registerToastElement, {
+      autohide: true,
+      delay: 3000  
+    });
+    registerToast.show();
+	}
+
+	}
+
+  </script>
+</body>
+</html>

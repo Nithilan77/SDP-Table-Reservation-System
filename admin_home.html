@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - Table Reservation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-image: url('Hotel page.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+    .navbar {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    .content-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      color: white;
+      padding: 20px;
+    }
+    .content-box {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(8px);
+      margin-left: 5%;
+    }
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-gap: 15px;
+      max-width: 38%;
+      height: 525px;
+    }
+    .image-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      border: 3px solid white;
+    }
+    .image-grid img:hover {
+      transform: scale(1.05);
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+    .btn-primary {
+      background: #ff9800;
+      border: none;
+      padding: 12px 20px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      margin-right: 15px;
+    }
+    .btn-primary:hover {
+      background: #e68900;
+      transform: scale(1.05);
+    }
+    @media (max-width: 768px) {
+      .content-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .content-box {
+        margin-left: 0;
+      }
+      .image-grid {
+        margin-top: 20px;
+        margin-right: 0;
+        width: 150px;
+      }
+      .image-grid img {
+        width: 75px;
+        height: 75px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">MR Pandian Hotel</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="admin_home.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_menu.html">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_messages.html">Messages</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_reservations.html">New Reservation</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_dashboard.html">Reservations</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html" style="color: red;">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Content Layout -->
+<div class="content-container">
+  <div class="content-box">
+    <h1>Welcome to MR Pandian Hotel</h1>
+    <p>Experience the Authentic Flavors of Chettinad - Where Tradition Meets Taste!</p>
+    <a href="admin_menu.html" class="btn btn-primary">View Menu</a>
+    <a href="admin_reservations.html" class="btn btn-primary">Reserve a Table</a>
+  </div>
+
+  <div class="image-grid">
+    <img src="https://5.imimg.com/data5/ANDROID/Default/2024/5/422808797/WR/SM/LZ/143729871/product-jpeg-500x500.jpg" alt="Dish 1">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSGmOmAXzZSD9Xl_JPJGi0MTr79I2ZWOMbgA&s" alt="Dish 2">
+    <img src="https://www.cubesnjuliennes.com/wp-content/uploads/2022/12/Tandoori-Chicken-Recipe.jpg" alt="Dish 3">
+    <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2022/06/chicken-tikka-kebab.jpg" alt="Dish 4">
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

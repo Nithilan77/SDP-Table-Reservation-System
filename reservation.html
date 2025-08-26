@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reserve Table - Table Reservation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+      background-color: rgba(0, 0, 0, 0.8) !important;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      border: none;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .form-control {
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      color: #333;
+    }
+
+    .form-control:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+
+    .btn-primary {
+      background-color: #0d6efd;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0b5ed7;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-position: center top;
+      }
+    }
+
+    @media (max-width: 768px) {
+  .container.reservation-section {
+    margin-top: 120px;
+  }
+}
+
+  </style>
+</head>
+
+<body onload="setupNavigation()">
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">MR Pandian Hotel</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link active" href="reservation.html">Reserve a Table</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html" style="color: #ff6b6b;">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Reservation Form -->
+  <div class="container d-flex justify-content-center align-items-center flex-grow-1 py-5">
+    <div class="card p-4 p-md-5" style="max-width: 600px; width: 100%;">
+      <h2 class="text-center">Book a Table</h2>
+      <form action="/cgi-bin/reservation_handler.exe" method="POST">
+        <div class="mb-3">
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" name="name" class="form-control" id="name" required />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" id="email" required />
+        </div>
+        <div class="mb-3">
+          <label for="guests" class="form-label">Number of Guests</label>
+          <input type="number" name="guests" class="form-control" id="guests" min="1" max="20" required />
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Select Date</label>
+          <input type="date" name="date" class="form-control" id="date" required />
+        </div>
+        <div class="mb-3">
+          <label for="time" class="form-label">Select Time</label>
+          <input type="time" name="time" class="form-control" id="time" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mt-3">Reserve Table</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", function (e) {
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const guests = parseInt(document.getElementById("guests").value);
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
+
+        const nameRegex = /^[A-Za-z\s]+$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const today = new Date().toISOString().split("T")[0];
+
+        let errors = [];
+
+        if (name.length < 2 || !nameRegex.test(name)) {
+          errors.push("Name must contain only letters and spaces (at least 2 characters).");
+        }
+
+        if (!emailRegex.test(email)) {
+          errors.push("Please enter a valid email address.");
+        }
+
+        if (isNaN(guests) || guests < 1 || guests > 20) {
+          errors.push("Number of guests must be between 1 and 20.");
+        }
+
+        if (!date || date < today) {
+          errors.push("Please select a valid reservation date (today or future).");
+        }
+
+        if (!time) {
+          errors.push("Please select a reservation time.");
+        }
+
+        if (errors.length > 0) {
+          e.preventDefault();
+          Swal.fire({
+            icon: 'error',
+            title: 'Please correct these errors:',
+            html: errors.join('<br>'),
+            confirmButtonColor: '#d33'
+          });
+        } else {
+          Swal.fire({
+            title: 'Validating...',
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

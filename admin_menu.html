@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Table Reservation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .card-img-top{
+        height:250px;
+        object-fit: cover;
+    }
+
+    .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+</style>
+
+<body onload="setupNavigation()" style="background-color: bisque;">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand text-center" href="#">MR Pandian Hotel</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="admin_home.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="admin_menu.html">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="admin_messages.html">Messages</a></li>
+                <li class="nav-item"><a class="nav-link" href="admin_reservations.html">New Reservation</a></li>
+                <li class="nav-item"><a class="nav-link" href="admin_dashboard.html">Reservations</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html" style="color: red;">Logout</a></li>
+              </ul>
+        </div>
+    </div>
+</nav>
+
+    <div class="container mt-4">
+        <h2 class="text-center">Our Menu</h2>
+
+        <h3 class="mt-4">Tiffin Varieties</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://t3.ftcdn.net/jpg/03/62/02/26/360_F_362022640_fZ6UM0JycJlFDdBiR1pYlNddKfdGvYwR.jpg" class="card-img-top" alt="Idly">
+                    <div class="card-body">
+                        <h5 class="card-title">Idly (2)</h5>
+                        <p class="card-text">Soft and fluffy steamed rice cakes.</p>
+                        <p><strong>₹30</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/12/85/15/08/kal-dosa.jpg" class="card-img-top" alt="Kal Dosa">
+                    <div class="card-body">
+                        <h5 class="card-title">Kal Dosa (2)</h5>
+                        <p class="card-text">Thick and spongy dosa.</p>
+                        <p><strong>₹45</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://www.shutterstock.com/image-photo/paneer-butter-dosa-chutney-sambar-600nw-1781711522.jpg" class="card-img-top" alt="Paneer Dosa">
+                    <div class="card-body">
+                        <h5 class="card-title">Paneer Dosa</h5>
+                        <p class="card-text">Dosa stuffed with paneer.</p>
+                        <p><strong>₹100</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR71Ww7FFLkutUn3GBXnH7gwQC1UXR7wIUvaA&s" class="card-img-top" alt="Special Dosa">
+                    <div class="card-body">
+                        <h5 class="card-title">Special Dosa</h5>
+                        <p class="card-text">Our chef's special dosa.</p>
+                        <p><strong>₹80</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://t4.ftcdn.net/jpg/01/89/45/21/360_F_189452136_gJBG4ZRXY9NnZZCGV2s8QhObmpeerJTO.jpg" class="card-img-top" alt="Masala Dosa">
+                    <div class="card-body">
+                        <h5 class="card-title">Masala Dosa</h5>
+                        <p class="card-text">Dosa with potato masala filling.</p>
+                        <p><strong>₹100</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://as1.ftcdn.net/jpg/05/58/91/54/1000_F_558915494_ppKrAnrZLd2MWhOGIu6g7lPniuxTbMPR.jpg" class="card-img-top" alt="Podi Dosa">
+                    <div class="card-body">
+                        <h5 class="card-title">Podi Dosa</h5>
+                        <p class="card-text">Dosa sprinkled with spicy podi.</p>
+                        <p><strong>₹100</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjJlxmgc8DgrHqki_P0aR3At-6enwYdiXMcA&s" class="card-img-top" alt="Onion Dosa">
+                    <div class="card-body">
+                        <h5 class="card-title">Onion Dosa</h5>
+                        <p class="card-text">Dosa with onion topping.</p>
+                        <p><strong>₹100</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mt-4">Meals Varieties</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPbkLoFIQM055Uv-1IgOJMGbsuPfGVF4FwLw&s" class="card-img-top" alt="Meals">
+                    <div class="card-body">
+                        <h5 class="card-title">Meals</h5>
+                        <p class="card-text">Rice with various side dishes.</p>
+                        <p><strong>₹150</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTslk00ucpmlXrtkVuowPnwvYNaw43ssCFRdw&s" class="card-img-top" alt="Fish Meals (Vanjiram)">
+                    <div class="card-body">
+                        <h5 class="card-title">Fish Meals (Vanjiram)</h5>
+                        <p class="card-text">Rice and fish curry with vanjiram.</p>
+                        <p><strong>₹320</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Sheela_fish_fry.jpg/1200px-Sheela_fish_fry.jpg" class="card-img-top" alt="Fish Meals (Seela)">
+                    <div class="card-body">
+                        <h5 class="card-title">Fish Meals (Seela)</h5>
+                        <p class="card-text">Rice and fish curry with seela.</p>
+                        <p><strong>₹300</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://media.istockphoto.com/id/928823336/photo/grilled-chicken-breast-fried-chicken-fillet-and-fresh-vegetable-salad-of-tomatoes-cucumbers.jpg?s=612x612&w=0&k=20&c=x6KbcglhT_oxKEzCoSM5E8abP3rlEZAt7jQhlAPZtoY=" class="card-img-top" alt="Chicken Meals">
+                    <div class="card-body">
+                        <h5 class="card-title">Chicken Meals</h5>
+                        <p class="card-text">Rice and chicken curry.</p>
+                        <p><strong>₹250</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj0oVob6xKLYya5GB1zJ3OUnT5zpYfn0-wlQ&sE" class="card-img-top" alt="Mutton Meals">
+                    <div class="card-body">
+                        <h5 class="card-title">Mutton Meals</h5>
+                        <p class="card-text">Rice and mutton curry.</p>
+                        <p><strong>₹280</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/South_Indian_non-veg_Meals.jpg" class="card-img-top" alt="Veg Meals">
+                    <div class="card-body">
+                        <h5 class="card-title">Veg Meals</h5>
+                        <p class="card-text">Rice and vegetable curries.</p>
+                        <p><strong>₹180</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJA-st_2EN6m678_pGKkcnPLxIURiJHBY5nA&s" class="card-img-top" alt="Egg Meals">
+                    <div class="card-body">
+                        <h5 class="card-title">Egg Meals</h5>
+                        <p class="card-text">Rice and egg curry.</p>
+                        <p><strong>₹200</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mt-4">Biryani Varieties</h3>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Chicken_Biryani.jpg/2560px-Chicken_Biryani.jpg" class="card-img-top" alt="Chicken Biryani">
+            <div class="card-body">
+                <h5 class="card-title">Chicken Biryani</h5>
+                <p class="card-text">Flavorful chicken biryani.</p>
+                <p><strong>₹220</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <img src="https://media.istockphoto.com/id/1410130688/photo/mutton-biryani-served-in-a-golden-dish-isolated-on-dark-background-side-view-indian-food.jpg?s=612x612&w=0&k=20&c=ueFrghYZuKAty-rFVe5dtMtNIbn0jaUsSvCUwTVOmd8=" class="card-img-top" alt="Mutton Biryani">
+            <div class="card-body">
+                <h5 class="card-title">Mutton Biryani</h5>
+                <p class="card-text">Rich mutton biryani.</p>
+                <p><strong>₹250</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQTAGbMIHL6Sc6F9xCZ4_Tqkn1JEVXa2afYg&s" class="card-img-top" alt="Vegetable Biryani">
+            <div class="card-body">
+                <h5 class="card-title">Vegetable Biryani</h5>
+                <p class="card-text">Delicious vegetable biryani.</p>
+                <p><strong>₹180</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mt-4">
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOz1dOIib_b_mPW_Lym5ewfO0Al6aC1BOU4A&s" class="card-img-top" alt="Egg Biryani">
+            <div class="card-body">
+                <h5 class="card-title">Egg Biryani</h5>
+                <p class="card-text">Biryani with boiled eggs.</p>
+                <p><strong>₹200</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mt-4">
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVIhsBACdbt_w5NtqyddbaiJU_LtECopgOXA&s" class="card-img-top" alt="Fish Biryani">
+            <div class="card-body">
+                <h5 class="card-title">Fish Biryani</h5>
+                <p class="card-text">Biryani with fish pieces.</p>
+                <p><strong>₹280</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mt-4">
+        <div class="card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Prawn_Biryani%2C_Hyderabad.jpg" class="card-img-top" alt="Prawn Biryani">
+            <div class="card-body">
+                <h5 class="card-title">Prawn Biryani</h5>
+                <p class="card-text">Biryani with prawns.</p>
+                <p><strong>₹300</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mt-4">
+        <div class="card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/2560px-Hyderabadi_Chicken_Biryani.jpg" class="card-img-top" alt="Hyderabadi Biryani">
+            <div class="card-body">
+                <h5 class="card-title">Hyderabadi Biryani</h5>
+                <p class="card-text">Special Hyderabadi style biryani.</p>
+                <p><strong>₹260</strong></p>
+            </div>
+        </div>
+    </div>
+
+
+        <h3 class="mt-4">Chinese Varieties</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Chicken_Fried_Rice.JPG" class="card-img-top" alt="Chicken Fried Rice">
+                    <div class="card-body">
+                        <h5 class="card-title">Chicken Fried Rice</h5>
+                        <p class="card-text">Fried rice with chicken.</p>
+                        <p><strong>₹180</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaWdIXM8DFpUVLm2FSN-gAt9TdPEsWIYm2pA&s" class="card-img-top" alt="Veg Fried Rice">
+                    <div class="card-body">
+                        <h5 class="card-title">Veg Fried Rice</h5>
+                        <p class="card-text">Fried rice with vegetables.</p>
+                        <p><strong>₹150</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz7_ExnBJm-grBGrIjthf-GaB4ZDBTqRs_ag&s" class="card-img-top" alt="Egg Fried Rice">
+                    <div class="card-body">
+                        <h5 class="card-title">Egg Fried Rice</h5>
+                        <p class="card-text">Fried rice with eggs.</p>
+                        <p><strong>₹160</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Chicken_noodles.jpg" class="card-img-top" alt="Chicken Noodles">
+                    <div class="card-body">
+                        <h5 class="card-title">Chicken Noodles</h5>
+                        <p class="card-text">Noodles with chicken.</p>
+                        <p><strong>₹170</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Noodles-Veg_Noodles.JPG/1024px-Noodles-Veg_Noodles.JPG" class="card-img-top" alt="Veg Noodles">
+                    <div class="card-body">
+                        <h5 class="card-title">Veg Noodles</h5>
+                        <p class="card-text">Noodles with vegetables.</p>
+                        <p><strong>₹140</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Gobi_Manchurian.jpg/2560px-Gobi_Manchurian.jpg" class="card-img-top" alt="Gobi Manchurian">
+                    <div class="card-body">
+                        <h5 class="card-title">Gobi Manchurian</h5>
+                        <p class="card-text">Cauliflower in Manchurian sauce.</p>
+                        <p><strong>₹160</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdY1CmpkRU6myyJjVuGS1zNMmR6lUUHhyo6g&s" class="card-img-top" alt="Chicken Manchurian">
+                    <div class="card-body">
+                        <h5 class="card-title">Chicken Manchurian</h5>
+                        <p class="card-text">Chicken in Manchurian sauce.</p>
+                        <p><strong>₹190</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mt-4">Masala Varieties</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrW8R1oco40KobZ-1ZOVztMp9LoyfaAX8S9A&s" class="card-img-top" alt="Paneer Masala">
+                    <div class="card-body">
+                        <h5 class="card-title">Paneer Masala</h5>
+                        <p class="card-text">Paneer in a rich masala gravy.</p>
+                        <p><strong>₹200</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2GChn-f8qKD31KZ20pUId0UMDlNTafXygAg&s" class="card-img-top" alt="Chicken Masala">
+                    <div class="card-body">
+                        <h5 class="card-title">Chicken Masala</h5>
+                        <p class="card-text">Chicken cooked in a spicy masala.</p>
+                        <p><strong>₹220</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Mutton_masala.JPG/1200px-Mutton_masala.JPG" class="card-img-top" alt="Mutton Masala">
+                    <div class="card-body">
+                        <h5 class="card-title">Mutton Masala</h5>
+                        <p class="card-text">Mutton cooked in a flavorful masala.</p>
+                        <p><strong>₹250</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chettinad_Egg_masala.jpg/800px-Chettinad_Egg_masala.jpg" class="card-img-top" alt="Egg Masala">
+                    <div class="card-body">
+                        <h5 class="card-title">Egg Masala</h5>
+                        <p class="card-text">Eggs cooked in a rich masala gravy.</p>
+                        <p><strong>₹180</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_MSWuSLu2CXuG_vA5bDk3qY-eP_Xc5TTh2Q&s" class="card-img-top" alt="Gobi Masala">
+                    <div class="card-body">
+                        <h5 class="card-title">Gobi Masala</h5>
+                        <p class="card-text">Cauliflower in a spicy masala.</p>
+                        <p><strong>₹160</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Fish_Masala_Fry.jpg/2560px-Fish_Masala_Fry.jpg" class="card-img-top" alt="Fish Masala">
+                    <div class="card-body">
+                        <h5 class="card-title">Fish Masala</h5>
+                        <p class="card-text">Fish cooked in a delicious masala.</p>
+                        <p><strong>₹280</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Prawns_Masala_Recipe.jpg" class="card-img-top" alt="Prawn Masala">
+                    <div class="card-body">
+                        <h5 class="card-title">Prawn Masala</h5>
+                        <p class="card-text">Prawns cooked in a rich masala.</p>
+                        <p><strong>₹300</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mt-4">Egg Varieties</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://media.istockphoto.com/id/1185235352/photo/boiled-eggs-cooked-in-spicy-curry-sauce-close-up-in-a-plate-horizontal.jpg?s=612x612&w=0&k=20&c=vI1r0To_SOHqy2721_AJ7OTejxDkSjMIEglR52AUrNY=" class="card-img-top" alt="Egg Curry">
+                    <div class="card-body">
+                        <h5 class="card-title">Egg Curry</h5>
+                        <p class="card-text">Eggs in a rich curry.</p>
+                        <p><strong>₹160</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5DjZIEjkHhVCK192phptGvGXtK4QoOC-OPw&s" class="card-img-top" alt="Egg Fry">
+                    <div class="card-body">
+                        <h5 class="card-title">Egg Fry</h5>
+                        <p class="card-text">Fried eggs with spices.</p>
+                        <p><strong>₹150</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa8aZ0HJtPHnspJUAv_fyyv-alVzOWxTop8Q&s" class="card-img-top" alt="Egg Bhurji">
+                    <div class="card-body">
+                        <h5 class="card-title">Egg Bhurji</h5>
+                        <p class="card-text">Scrambled eggs with spices.</p>
+                        <p><strong>₹140</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Egg_curry.jpg/640px-Egg_curry.jpg" class="card-img-top" alt="Egg Masala">
+                    <div class="card-body">
+                        <h5 class="card-title">Egg Masala</h5>
+                        <p class="card-text">Eggs in a rich masala gravy.</p>
+                        <p><strong>₹180</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://www.yellowthyme.com/wp-content/uploads/2024/07/Egg-Dosa.jpg" class="card-img-top" alt="Egg Dosa">
+                    <div class="card-body">
+                        <h5 class="card-title">Egg Dosa</h5>
+                        <p class="card-text">Dosa with an egg topping.</p>
+                        <p><strong>₹170</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Egg_biryani.JPG" class="card-img-top" alt="Egg Biryani">
+                    <div class="card-body">
+                        <h5 class="card-title">Egg Biryani</h5>
+                        <p class="card-text">Biryani with boiled eggs.</p>
+                        <p><strong>₹200</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Egg_roast.jpg/640px-Egg_roast.jpg" class="card-img-top" alt="Egg Roast">
+                    <div class="card-body">
+                        <h5 class="card-title">Egg Roast</h5>
+                        <p class="card-text">Roasted eggs with spices.</p>
+                        <p><strong>₹190</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="mt-4">Fry Varieties</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT88M3S2TqsAXAnqIqISo7tXhKBMO2d1nltZw&s" class="card-img-top" alt="Mutton Fry">
+                    <div class="card-body">
+                        <h5 class="card-title">Mutton Fry</h5>
+                        <p class="card-text">Mutton pieces fried with spices and herbs.</p>
+                        <p><strong>₹210</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Fry_chicken.jpg/1200px-Fry_chicken.jpg" class="card-img-top" alt="Chicken Fry">
+                    <div class="card-body">
+                        <h5 class="card-title">Chicken Fry</h5>
+                        <p class="card-text">Chicken pieces fried to a golden crisp.</p>
+                        <p><strong>₹170</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Z6gkctKlKxkegBGuvaUfXtzkWo-gzMyboQ&s" class="card-img-top" alt="Prawn Fry">
+                    <div class="card-body">
+                        <h5 class="card-title">Prawn Fry</h5>
+                        <p class="card-text">Prawns marinated and deep-fried.</p>
+                        <p><strong>₹200</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Quail_Fry.JPG/1280px-Quail_Fry.JPG" class="card-img-top" alt="Kaadai Fry">
+                    <div class="card-body">
+                        <h5 class="card-title">Kaadai Fry</h5>
+                        <p class="card-text">Quail marinated and fried with spices.</p>
+                        <p><strong>₹180</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Assamese_traditional_style_chicken_fry.jpg/571px-Assamese_traditional_style_chicken_fry.jpg" class="card-img-top" alt="Nattu Kozhi Fry">
+                    <div class="card-body">
+                        <h5 class="card-title">Nattu Kozhi Fry</h5>
+                        <p class="card-text">Country chicken fried with traditional spices.</p>
+                        <p><strong>₹190</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Liver_Fry.jpg/1200px-Liver_Fry.jpg" class="card-img-top" alt="Mutton Liver Fry">
+                    <div class="card-body">
+                        <h5 class="card-title">Mutton Liver Fry</h5>
+                        <p class="card-text">Mutton liver fried with onions and spices.</p>
+                        <p><strong>₹190</strong></p>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdGfvww1ebZppFuSmBJoCckBst9ATMAjCEkA&" class="card-img-top" alt="Pepper Chicken Fry">
+                    <div class="card-body">
+                        <h5 class="card-title">Pepper Chicken Fry</h5>
+                        <p class="card-text">Chicken fried with a generous amount of black pepper.</p>
+                        <p><strong>₹170</strong></p>
+                    </div>
+                </div>
+            </div>
+           
+            <h3 class="mt-4">Gravy Varieties</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Kerala_fish_curry.JPG/640px-Kerala_fish_curry.JPG" class="card-img-top" alt="Fish Kuruma (Vanjiram)">
+                        <div class="card-body">
+                            <h5 class="card-title">Fish Kuruma (Vanjiram)</h5>
+                            <p class="card-text">Fish in a creamy kuruma gravy.</p>
+                            <p><strong>₹180</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Sheela_Meen_Kuzhambu.JPG/1280px-Sheela_Meen_Kuzhambu.JPG" class="card-img-top" alt="Seela Fish Gravy">
+                        <div class="card-body">
+                            <h5 class="card-title">Seela Fish Gravy</h5>
+                            <p class="card-text">Seela fish cooked in a flavorful gravy.</p>
+                            <p><strong>₹170</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Kolkata_chilli_chicken.jpg" class="card-img-top" alt="Chilli Chicken Gravy">
+                        <div class="card-body">
+                            <h5 class="card-title">Chilli Chicken Gravy</h5>
+                            <p class="card-text">Chicken in a spicy chilli gravy.</p>
+                            <p><strong>₹190</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Paneer_Chilli_Semi_Gravy.jpg" class="card-img-top" alt="Chilli Paneer Gravy">
+                        <div class="card-body">
+                            <h5 class="card-title">Chilli Paneer Gravy</h5>
+                            <p class="card-text">Paneer in a spicy chilli gravy.</p>
+                            <p><strong>₹160</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTHlBdbnpbam4A-o-MQOOoR0KLSNIizz98IQ&s" class="card-img-top" alt="Pepper Chicken Gravy">
+                        <div class="card-body">
+                            <h5 class="card-title">Pepper Chicken Gravy</h5>
+                            <p class="card-text">Chicken cooked with black pepper gravy.</p>
+                            <p><strong>₹180</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <img src="https://media-cdn.tripadvisor.com/media/photo-s/1b/e1/fe/2b/mutton-brain-fry.jpg" class="card-img-top" alt="Mutton Brain Roast">
+                        <div class="card-body">
+                            <h5 class="card-title">Mutton Brain Roast</h5>
+                            <p class="card-text">Mutton brain roasted with spices.</p>
+                            <p><strong>₹190</strong></p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <img src="https://theolddelhi.com/wp-content/uploads/2021/08/Recipe-of-Mutton-Masala-Boti.jpg" class="card-img-top" alt="Mutton Boti">
+                        <div class="card-body">
+                            <h5 class="card-title">Mutton Boti</h5>
+                            <p class="card-text">Mutton pieces cooked in a thick gravy.</p>
+                            <p><strong>₹150</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="mt-4">Chicken Varieties</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Chicken_Tandoori.JPG" class="card-img-top" alt="Tandoori Chicken (Full)">
+                        <div class="card-body">
+                            <h5 class="card-title">Tandoori Chicken (Full)</h5>
+                            <p class="card-text">Whole chicken marinated and roasted in tandoor.</p>
+                            <p><strong>₹400</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Authentic_tandoori_chicken.JPG/1200px-Authentic_tandoori_chicken.JPG" class="card-img-top" alt="Tandoori Chicken (Half)">
+                        <div class="card-body">
+                            <h5 class="card-title">Tandoori Chicken (Half)</h5>
+                            <p class="card-text">Half chicken marinated and roasted in tandoor.</p>
+                            <p><strong>₹220</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK90x51cqcoRMePy8_rw4i0EAt1ZM_HMp9bw&s" class="card-img-top" alt="Tandoori Chicken (1/4)">
+                        <div class="card-body">
+                            <h5 class="card-title">Tandoori Chicken (1/4)</h5>
+                            <p class="card-text">Quarter chicken marinated and roasted in tandoor.</p>
+                            <p><strong>₹150</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVnuXSEkKR_NgVzaF2rzpN3Q9NGMneyej5-w&s" class="card-img-top" alt="Chicken 65">
+                        <div class="card-body">
+                            <h5 class="card-title">Chicken 65</h5>
+                            <p class="card-text">Spicy deep-fried chicken pieces.</p>
+                            <p><strong>₹180</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Chicken_Chili_HR2.jpg/800px-Chicken_Chili_HR2.jpg" class="card-img-top" alt="Chilli Chicken">
+                        <div class="card-body">
+                            <h5 class="card-title">Chilli Chicken</h5>
+                            <p class="card-text">Chicken cooked with onions, peppers, and chilli sauce.</p>
+                            <p><strong>₹180</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Spicy_Chicken_Lollipop.jpg/800px-Spicy_Chicken_Lollipop.jpg" class="card-img-top" alt="Chicken Lollipop">
+                        <div class="card-body">
+                            <h5 class="card-title">Chicken Lollipop</h5>
+                            <p class="card-text">Chicken winglet shaped and fried with spices.</p>
+                            <p><strong>₹180</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvkTWz6qQbHZj0xRQfjscaNQEw3_TtMaXlVw&s" class="card-img-top" alt="Goli Soda">
+                        <div class="card-body">
+                            <h5 class="card-title">Goli Soda</h5>
+                            <p class="card-text">Traditional Indian lemon-flavored soda.</p>
+                            <p><strong>₹35</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     </div>       
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html> 
