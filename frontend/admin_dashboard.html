@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - MR Pandian Hotel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for trash icon -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Add these inside <head> -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to right, #f8f9fa, #e2e2e2);
+    }
+
+    h2, h4 {
+        font-family: 'Playfair Display', serif;
+        color: #b38b00;
+        text-shadow: 1px 1px 1px #fff;
+    }
+
+    
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .dashboard-container {
+        margin-top: 40px;
+        padding: 30px;
+        background: #ffffffc9;
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .reservation-card {
+        backdrop-filter: blur(8px);
+        background: rgba(255, 255, 255, 0.8) !important;
+        border-radius: 15px;
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .reservation-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .bg-light {
+        background-color: rgba(255, 243, 205, 0.7) !important;
+        border-left: 5px solid #ffc107;
+    }
+
+    .waitlisted-badge {
+        background-color: #ffc107;
+        color: #222;
+        padding: 5px 10px;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    .btn {
+        border-radius: 10px;
+        font-weight: 500;
+    }
+
+    .btn-danger {
+        background-color: #a94442;
+        border-color: #a94442;
+    }
+
+    .btn-success {
+        background-color: #b38b00;
+        border-color: #b38b00;
+    }
+
+    input.form-control {
+        border-radius: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    h6.text-secondary {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .text-muted {
+        font-style: italic;
+    }
+</style>
+
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">MR Pandian Hotel</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="admin_home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="admin_menu.html">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="admin_messages.html">Messages</a></li>
+          <li class="nav-item"><a class="nav-link" href="admin_reservations.html">New Reservation</a></li>
+          <li class="nav-item"><a class="nav-link active" href="admin_dashboard.html">Reservations</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html" style="color: red;">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!-- Admin Dashboard -->
+<div class="container dashboard-container">
+    <h2 class="text-center">Admin Dashboard</h2>
+
+    <!-- Search Bar -->
+    <div class="mb-3 d-flex gap-3">
+        <input type="text" class="form-control" id="searchInput" placeholder="Search by Name, Email, Date, or Time" onkeyup="searchReservation()">
+    </div>
+
+    <!-- Delete Reservation by Name -->
+    <div class="mb-3 d-flex gap-3">
+        <input type="text" class="form-control" id="deleteNameInput" placeholder="Enter Name to Delete">
+        <button class="btn btn-danger" onclick="deleteByName()">Delete</button>
+    </div>
+
+    <!-- Filters Section -->
+<div class="mb-3 d-flex gap-3 flex-wrap">
+    <select id="statusFilter" class="form-select" style="max-width: 200px;" onchange="applyFilters()">
+        <option value="ALL">All Statuses</option>
+        <option value="CONFIRMED">Confirmed</option>
+        <option value="WAITLISTED">Waitlisted</option>
+    </select>
+
+    <input type="number" id="guestFilter" class="form-control" placeholder="Min Guests" min="1" onchange="applyFilters()" style="max-width: 200px;">
+</div>
+
+
+    <!-- Export to CSV -->
+    <div class="mb-3">
+        <button class="btn btn-success" onclick="exportToCSV()">Export Reservations to CSV</button>
+    </div>
+
+    <!-- Reservations Cards -->
+    <div class="container" id="cardsContainer">
+        <!-- Reservations will be inserted here as cards -->
+    </div>
+
+</div>
+
+<!-- JavaScript for Admin Functions -->
+<script>
+  let reservations = [];
+
+  // Function to load reservations from the server
+  async function loadReservations() {
+      try {
+          const response = await fetch('/cgi-bin/admin_dashboard_handler.cgi');
+          reservations = await response.json();
+          renderGroupedReservations(reservations, document.getElementById("cardsContainer"));
+      } catch (error) {
+          console.error("Failed to load reservations", error);
+      }
+  }
+
+  // Modified function to group reservations by date and status
+  function renderGroupedReservations(reservationList, container) {
+    container.innerHTML = '';
+
+    if (reservationList.length === 0) {
+        container.innerHTML = `<div class="text-center text-muted">No reservations found.</div>`;
+        return;
+    }
+
+    const grouped = {};
+    reservationList.forEach(res => {
+        if (!grouped[res.date]) grouped[res.date] = [];
+        grouped[res.date].push(res);
+    });
+
+    const sortedDates = Object.keys(grouped).sort();
+
+    sortedDates.forEach(date => {
+        const totalCount = grouped[date].length;
+const dateHeading = `
+  <h4 class="mt-4 text-primary border-bottom pb-2 d-flex justify-content-between align-items-center">
+    ${date}
+  </h4>`;
+
+        container.innerHTML += dateHeading;
+
+        const confirmed = grouped[date].filter(r => r.status === "CONFIRMED");
+        const waitlisted = grouped[date].filter(r => r.status === "WAITLISTED");
+
+        const renderCardRow = (data, label) => {
+            if (data.length === 0) return;
+            if (label) container.innerHTML += `<h6 class="text-secondary mt-2">${label}</h6>`;
+
+            const row = document.createElement("div");
+            row.className = "row g-3 mb-4";
+
+            data.forEach(res => {
+                const card = document.createElement("div");
+                card.className = "col-md-4";
+                card.innerHTML = `
+                    <div class="card shadow-sm h-100 reservation-card ${res.status === "WAITLISTED" ? 'bg-light' : ''}">
+                        <div class="card-body">
+                            <h5 class="card-title">${res.name}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${res.email}</h6>
+                            <p class="card-text">
+                                Guests: <strong>${res.guests}</strong><br>
+                                Time: <strong>${res.time}</strong><br>
+                                Status: ${res.status === "CONFIRMED"
+                                    ? '<span class="badge bg-success">Confirmed</span>'
+                                    : `<span class="waitlisted-badge">Waitlisted</span>`}
+                            </p>
+                        </div>
+                    </div>
+                `;
+                row.appendChild(card);
+            });
+
+            container.appendChild(row);
+        };
+
+        renderCardRow(confirmed, "Confirmed Reservations");
+        renderCardRow(waitlisted, "Waitlisted Reservations");
+    });
+  }
+
+  // Function to search reservations by name, email, date, or time
+  function searchReservation() {
+    const searchQuery = document.getElementById("searchInput").value.toLowerCase();
+    const filteredReservations = reservations.filter(res =>
+      res.name.toLowerCase().includes(searchQuery) ||
+      res.email.toLowerCase().includes(searchQuery) ||
+      res.date.toLowerCase().includes(searchQuery) ||
+      res.time.toLowerCase().includes(searchQuery)
+    );
+    renderGroupedReservations(filteredReservations, document.getElementById("cardsContainer"));
+  }
+
+  // Delete reservation by name
+function deleteByName() {
+    const nameToDelete = document.getElementById("deleteNameInput").value.trim();
+    if (!nameToDelete) {
+        Swal.fire("Error", "Please enter a name to delete.", "warning");
+        return;
+    }
+
+    // Find the reservation by name to delete
+    const reservationToDelete = reservations.find(res => res.name.toLowerCase() === nameToDelete.toLowerCase());
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: `This will delete all reservations with the name "${nameToDelete}".`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`/cgi-bin/delete_reservation_by_name.cgi?name=${encodeURIComponent(nameToDelete)}&date=${encodeURIComponent(reservationToDelete.date)}&time=${encodeURIComponent(reservationToDelete.time)}`)
+                .then(res => res.text())
+                .then(msg => {
+                    Swal.fire("Deleted", msg, "success");
+                    loadReservations(); // reload updated list
+                })
+                .catch(err => {
+                    console.error(err);
+                    Swal.fire("Error", "Failed to delete reservation.", "error");
+                });
+        }
+    });
+}
+
+// Apply filters (search + status + guests)
+function applyFilters() {
+    const searchQuery = document.getElementById("searchInput").value.toLowerCase();
+    const statusFilter = document.getElementById("statusFilter").value;
+    const guestFilter = parseInt(document.getElementById("guestFilter").value) || 0;
+
+    const filtered = reservations.filter(res => {
+        const matchesSearch =
+            res.name.toLowerCase().includes(searchQuery) ||
+            res.email.toLowerCase().includes(searchQuery) ||
+            res.date.toLowerCase().includes(searchQuery) ||
+            res.time.toLowerCase().includes(searchQuery);
+
+        const matchesStatus = statusFilter === "ALL" || res.status === statusFilter;
+        const matchesGuests = parseInt(res.guests) >= guestFilter;
+
+        return matchesSearch && matchesStatus && matchesGuests;
+    });
+
+    renderGroupedReservations(filtered, document.getElementById("cardsContainer"));
+}
+
+// Overwrite search function to call filter
+function searchReservation() {
+    applyFilters();
+}
+
+
+function exportToCSV() {
+    window.location.href = "/cgi-bin/export_reservations.cgi";
+}
+
+  // Initialize the dashboard with the reservations
+  loadReservations();
+</script>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
