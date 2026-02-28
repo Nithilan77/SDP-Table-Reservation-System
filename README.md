@@ -14,17 +14,9 @@ The system handles everything from receiving bookings from the website, securely
 
 ## ✨ Core Features
 *   **Fast Backend Engine:** Written entirely in C, making it incredibly fast at receiving and processing form submissions.
-*   **Safe Multi-User Booking:** Uses special locks ("Mutex locks") so if two people try to book a table at the exact same millisecond, the system safely processes them one by one without losing data.
 *   **Smart Waitlist System:** Automatically moves overflowing reservations to a waitlist.
 *   **Secure Logins:** Separate dashboards for normal Users and Restaurant Admins. Passwords are securely scrambled (hashed) so they can never be stolen.
 *   **Admin Dashboard:** Allows managers to view all bookings, edit them, delete them safely, and even download them to Excel (.CSV) with one click.
-
-## 🛡️ Security Highlights
-This system was built with security in mind to protect against hackers:
-*   **Crash Protection:** The system automatically rejects files or data that are too large, preventing the server from crashing.
-*   **Safe Memory Handling:** Carefully limits how much memory can be used so attackers cannot overflow the system.
-*   **Hack Prevention:** Automatically cleans up any dangerous code (like `<script>` tags) that someone might try to type into a reservation name.
-*   **Protected Pages:** You cannot access the admin dashboard unless you are properly logged in.
 
 ## 🚀 How to Run It (For Windows)
 
@@ -45,4 +37,5 @@ Take the ready-to-use `.cgi` files (found in the `compiled_binaries` folder) and
 3. Open your web browser and go to: `http://localhost/frontend/index.html`
 
 ## 👨‍💻 Author
-Designed and Built by **Nithilan** (3rd-Semester IT Student).
+**Muskan Kumari V**
+**Nithilan S**
